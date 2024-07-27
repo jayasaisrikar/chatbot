@@ -1,0 +1,38 @@
+<!-- templates/chatbot.html -->
+{% extends 'base.html' %}
+
+{% block title %}Chatbot - {{ chat_session.product_name }}{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="p-8">
+        <h1><span class="mr-4">Welcome, {{ user.username }}</span></h1>
+        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-4">
+            Chatbot for {{ chat_session.product_name }}
+        </div>
+        <div id="chat-messages" class="mb-4 h-96 overflow-y-auto border rounded p-4">
+            {% for message in chat_messages %}
+                <div class="mb-2">
+                    <strong>You:</strong> {{ message.user_message }}
+                </div>
+                <div class="mb-4 pl-4">
+                    <strong>Bot:</strong> {{ message.bot_response }}
+                </div>
+            {% endfor %}
+        </div>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="{{ form.message.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                    Your Message
+                </label>
+                {{ form.message }}
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Send
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

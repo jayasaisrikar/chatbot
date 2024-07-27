@@ -1,0 +1,28 @@
+# Project structure
+chatbot_project/
+    manage.py
+    chatbot_project/
+        __init__.py
+        settings.py
+        urls.py
+        asgi.py
+        wsgi.py
+    chatbot_app/
+        __init__.py
+        admin.py
+        apps.py
+        models.py
+        views.py
+        urls.py
+        forms.py
+        utils.py
+        templates/
+            base.html
+            home.html
+            login.html
+            signup.html
+            chatbot.html
+        static/
+            css/
+                styles.css
+    requirements.txt

@@ -1,0 +1,49 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - Chatbot App{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="md:flex">
+        <div class="p-8">
+            <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Sign Up</div>
+            <form method="post" class="mt-4">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="{{ form.username.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                        Username
+                    </label>
+                    {{ form.username }}
+                </div>
+                <div class="mb-4">
+                    <label for="{{ form.email.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                        Email
+                    </label>
+                    {{ form.email }}
+                </div>
+                <div class="mb-4">
+                    <label for="{{ form.password1.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                        Password
+                    </label>
+                    {{ form.password1 }}
+                </div>
+                <div class="mb-6">
+                    <label for="{{ form.password2.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                        Confirm Password
+                    </label>
+                    {{ form.password2 }}
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Sign Up
+                    </button>
+                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{% url 'login' %}">
+                        Already have an account?
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

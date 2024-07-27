@@ -1,0 +1,35 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home - Chatbot App{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="md:flex">
+        <div class="p-8">
+            <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Welcome to Chatbot App</div>
+            <p class="mt-2 text-gray-500">Start a new chat session by entering a product name and the number of articles.</p>
+            <form method="post" class="mt-4">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="{{ form.product_name.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                        Product Name
+                    </label>
+                    {{ form.product_name }}
+                </div>
+                <div class="mb-4">
+                    <label for="{{ form.num_articles.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                        Number of Articles
+                    </label>
+                    {{ form.num_articles }}
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Start Chat Session
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
