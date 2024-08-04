@@ -4,7 +4,6 @@ requests
 beautifulsoup4
 sentence-transformers
 google-generativeai
-faiss-cpu
 python-dotenv
 langchain
 langchain-community
