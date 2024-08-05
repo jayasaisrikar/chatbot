@@ -3,36 +3,62 @@
 
 {% block title %}Chatbot - {{ chat_session.product_name }}{% endblock %}
 {% block content %}
-<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-    <div class="p-8">
-        <h1><span class="mr-4">Welcome, {{ user.username }}</span></h1>
-        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-4">
+<div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+    <div class="p-8 space-y-6">
+        <h1 class="text-3xl font-extrabold text-gray-900">
+            Welcome, <span class="text-indigo-600">{{ user.username }}</span>
+        </h1>
+        <div class="text-indigo-600 font-semibold uppercase tracking-wide text-sm">
             Chatbot for {{ chat_session.product_name }}
         </div>
-        <div id="chat-messages" class="mb-4 h-96 overflow-y-auto border rounded p-4">
+        <div id="chat-messages" class="border border-gray-200 rounded-lg p-4 bg-gray-50 space-y-4 overflow-auto max-h-[500px]">
             {% for message in chat_messages %}
-                <div class="mb-2">
-                    <strong>You:</strong> {{ message.user_message }}
-                </div>
-                <div class="mb-4 pl-4">
-                    <strong>Bot:</strong> {{ message.bot_response }}
+                <div class="flex flex-col space-y-2">
+                    {% if message.user_message %}
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-500 text-white p-3 rounded-lg max-w-[70%] self-end shadow-lg">
+                                {{ message.user_message }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if message.bot_response %}
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-gray-800 text-white p-3 rounded-lg max-w-[70%] self-start shadow-lg">
+                                {{ message.bot_response|safe }}
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
-        <form method="post" class="mt-4">
+        <form method="post" class="space-y-4 mt-6">
             {% csrf_token %}
-            <div class="mb-4">
-                <label for="{{ form.message.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+            <div>
+                <label for="{{ form.message.id_for_label }}" class="block text-gray-700 text-sm font-medium mb-2">
                     Your Message
                 </label>
-                {{ form.message }}
+                <input type="text" name="{{ form.message.name }}" id="{{ form.message.id_for_label }}" class="border border-gray-300 rounded-md shadow-sm p-3 w-full focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out" />
             </div>
-            <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            <div class="flex justify-end">
+                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150 ease-in-out" type="submit">
                     Send
                 </button>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chatMessages = document.getElementById('chat-messages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Automatically scroll to bottom on new message submission
+    document.querySelector('form').addEventListener('submit', function() {
+        setTimeout(function() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 100);
+    });
+});
+</script>
 {% endblock %}

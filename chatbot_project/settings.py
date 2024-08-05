@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chatbot_app',
+    'crispy_forms',
+    'crispy_tailwind',
 ]
+
+CRISPY_TEMPLATE_PACK = 'tailwind'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,11 +82,11 @@ WSGI_APPLICATION = 'chatbot_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chatbot',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': '1206',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'PASSWORD': 'UhTDTWKZDWwcpZBPveFPqwXbBDzljefs',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '40953',
     }
 }
 
